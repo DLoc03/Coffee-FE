@@ -3,16 +3,14 @@ import { connect } from "react-redux";
 import { push } from "connected-react-router";
 
 import * as actions from "../../store/actions";
-
-import "./Resigter.css";
 import { FormattedMessage } from "react-intl";
-import { handleResigter } from "../../services/userService";
+import { handleLogin } from "../../services/userService";
 import axios from "axios";
 import { size } from "lodash";
 import Logo from "../../assets/cophee-icon.png";
 import { withRouter } from "react-router-dom";
 
-class Resigter extends Component {
+class UserLogin extends Component {
   constructor(props) {
     super(props);
 
@@ -20,17 +18,8 @@ class Resigter extends Component {
       email: "",
       password: "",
       isShowPwd: false,
-      username: "",
-      roleID: "",
     };
   }
-
-  handleOnChangeUsername = (even) => {
-    this.setState({
-      username: even.target.value,
-    });
-    console.log(even.target.value);
-  };
 
   handleOnChangeEmail = (event) => {
     this.setState({
@@ -46,27 +35,20 @@ class Resigter extends Component {
     console.log(event.target.value);
   };
 
-  handleResigter = async () => {
+  handleLogin = async () => {
     this.setState({
       errMessage: "",
     });
 
-    console.log("Username: ", this.state.username);
     console.log("Email: ", this.state.email);
     console.log("Password: ", this.state.password);
-    console.log("RoleID: ", this.state.roleID);
     try {
-      //Gọi hàm handleResigter từ file userService.js
-      let response = await handleResigter(
-        this.state.username,
-        this.state.email,
-        this.state.password,
-        this.state.roleID
-      );
+      //Gọi hàm handleLogin từ file userService.js
+      let response = await handleLogin(this.state.email, this.state.password);
       //Nếu errCode phía server trả về khác 0 thì hiển thị mã lỗi lên màn hình
       if (response.data.errCode !== 0) {
         this.setState({
-          errMessage: response.data.errMessage,
+          errMessage: response.data.message,
         });
       }
       //Nếu errCode phía server trả về bằng 0 thì đăng nhập thành công
@@ -95,24 +77,14 @@ class Resigter extends Component {
 
   render() {
     return (
-      <div className="resigter-background">
-        <div className="resigter-container">
-          <div className="resigter-content row">
-            <div className="col-12 text-resigter">
+      <div className="login-background">
+        <div className="login-container">
+          <div className="login-content row">
+            <div className="col-12 text-login">
               <img src={Logo} style={{ width: 64, height: 64 }}></img>
             </div>
-            <div className="col-12 text-resigter">Đăng ký</div>
-            <div className="col-12 form-group resigter-input">
-              <label>Tên người dùng</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Tên người dùng"
-                value={this.state.username}
-                onChange={(event) => this.handleOnChangeUsername(event)}
-              />
-            </div>
-            <div className="col-12 form-group resigter-input">
+            <div className="col-12 text-login">Đăng nhập</div>
+            <div className="col-12 form-group login-input">
               <label>Email</label>
               <input
                 type="text"
@@ -122,7 +94,7 @@ class Resigter extends Component {
                 onChange={(event) => this.handleOnChangeEmail(event)}
               />
             </div>
-            <div className="col-12 form-group resigter-input">
+            <div className="col-12 form-group login-input">
               <label>Mật khẩu</label>
               <div className="custom-input-password">
                 <input
@@ -149,11 +121,8 @@ class Resigter extends Component {
               {this.state.errMessage}
             </div>
             <div className="col-12">
-              <button
-                className="btn-resigter"
-                onClick={() => this.handleResigter()}
-              >
-                Đăng ký
+              <button className="btn-login" onClick={() => this.handleLogin()}>
+                Đăng nhập
               </button>
             </div>
 
@@ -184,4 +153,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Resigter);
+export default connect(mapStateToProps, mapDispatchToProps)(UserLogin);

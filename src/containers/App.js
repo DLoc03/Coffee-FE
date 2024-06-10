@@ -24,6 +24,8 @@ import StoreInfo from "../components/StoreInfo/StoreInfo";
 import PageIsLogin from "./PageIsLogin/PageIsLogin";
 import AboutUsLogin from "./AboutUsLogin/AboutLogin";
 import LocationLogin from "./LocationLogin/LocationLogin";
+import UserLogin from "./UserLogin/UserLogin";
+import Profile from "./Profile/Profile";
 
 import { CustomToastCloseButton } from "../components/CustomToast";
 import ConfirmModal from "../components/ConfirmModal";
@@ -64,7 +66,8 @@ class App extends Component {
                 <Route path={path.PAGEISLOGIN} component={PageIsLogin} />
                 <Route path={path.RESIGTER} component={Resigter} />
                 <Route path={path.LOCATIONLOGIN} component={LocationLogin} />
-                <Route path={path.ABOUTUSLOGIN} component={AboutUsLogin} />
+                <Route path={path.USERLOGIN} component={UserLogin} />
+                <Route path={path.USERPROFILE} component={Profile} />
                 <Route
                   path={path.LOGIN}
                   component={userIsNotAuthenticated(Login)}

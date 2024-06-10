@@ -6,7 +6,7 @@ import * as actions from "../../store/actions";
 
 import "./Login.scss";
 import { FormattedMessage } from "react-intl";
-import { handleLogin } from "../../services/userService";
+import { handleAdminLogin } from "../../services/userService";
 import axios from "axios";
 import { size } from "lodash";
 import Logo from "../../assets/cophee-icon.png";
@@ -37,6 +37,11 @@ class Login extends Component {
     console.log(event.target.value);
   };
 
+  comeback = () => {
+    console.log("Log out");
+    this.props.processLogout();
+  };
+
   handleLogin = async () => {
     this.setState({
       errMessage: "",
@@ -46,7 +51,10 @@ class Login extends Component {
     console.log("Password: ", this.state.password);
     try {
       //Gọi hàm handleLogin từ file userService.js
-      let response = await handleLogin(this.state.email, this.state.password);
+      let response = await handleAdminLogin(
+        this.state.email,
+        this.state.password
+      );
       //Nếu errCode phía server trả về khác 0 thì hiển thị mã lỗi lên màn hình
       if (response.data.errCode !== 0) {
         this.setState({
@@ -55,8 +63,8 @@ class Login extends Component {
       }
       //Nếu errCode phía server trả về bằng 0 thì đăng nhập thành công
       if (response.data.errCode === 0) {
-        // this.props.userLoginSuccess(response.user);
-        this.props.history.push("/home/user");
+        this.props.userLoginSuccess(response.user);
+        // this.props.history.push("/home/user");
       }
       //Hiển thị lỗi nếu ô nhập email và mật khẩu trống
     } catch (e) {
@@ -80,12 +88,15 @@ class Login extends Component {
   render() {
     return (
       <div className="login-background">
+        <div className="btn btn-logout" onClick={() => this.comeback()}>
+          <i className="fas fa-sign-out-alt"></i>
+        </div>
         <div className="login-container">
           <div className="login-content row">
             <div className="col-12 text-login">
               <img src={Logo} style={{ width: 64, height: 64 }}></img>
             </div>
-            <div className="col-12 text-login">Đăng nhập</div>
+            <div className="col-12 text-login">Đăng nhập quản trị viên</div>
             <div className="col-12 form-group login-input">
               <label>Email</label>
               <input
@@ -152,6 +163,7 @@ const mapDispatchToProps = (dispatch) => {
     // userLoginFail: () => dispatch(actions.adminLoginFail()),
     userLoginSuccess: (userInfo) =>
       dispatch(actions.userLoginSuccess(userInfo)),
+    processLogout: () => dispatch(actions.processLogout()),
   };
 };
 

@@ -9,7 +9,7 @@ class TopNav extends Component {
       <div className="top-nav-box">
         <div className="top-nav-bar">
           <div class="logo">
-            <img src={Logo} href="" alt="Logo" />
+            <img src={Logo} href="/home" alt="Logo" />
           </div>
           <div className="main-nav">
             <li>
@@ -20,12 +20,12 @@ class TopNav extends Component {
             <li>
               <a href="/listall">Quán cà phê</a>
             </li>
-            <li>
+            {/* <li>
               <a href="/aboutus">Về chúng tôi</a>
-            </li>
+            </li> */}
           </div>
           <div className="login-nav">
-            <Link to={"/login"}>
+            <Link to={"/userlogin"}>
               <button type="submit" className="login-btn" id="login-btn">
                 Đăng nhập
               </button>

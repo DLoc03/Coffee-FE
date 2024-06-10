@@ -13,7 +13,7 @@ class IsLogin extends Component {
       <div className="top-nav-box">
         <div className="top-nav-bar">
           <div class="logo">
-            <img src={Logo} href="" alt="Logo" />
+            <img src={Logo} href="/home/user" alt="Logo" />
           </div>
           <div className="main-nav">
             <li>
@@ -24,15 +24,19 @@ class IsLogin extends Component {
             <li>
               <a href="/location/user">Quán cà phê</a>
             </li>
-            <li>
+            {/* <li>
               <a href="/aboutus/user">Về chúng tôi</a>
-            </li>
+            </li> */}
           </div>
-          <div className="profile-img">
-            <Link to={"/home/user"}>
+          <div className="profile-nav">
+            <div className="profile-img">
               <img src={ProfileImg} alt="Profile"></img>
-              {/* <Navigator menus={adminMenu} /> */}
-            </Link>
+              <Link to={"/home/user"}></Link>
+            </div>
+            <div class="profile-list">
+              <a href="/user">Hồ sơ của bạn</a>
+              <a href="/home">Đăng xuất</a>
+            </div>
           </div>
         </div>
         <div className="search-container">

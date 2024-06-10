@@ -9,7 +9,7 @@ class QuizHome extends Component {
   render() {
     return (
       <div className="quiz-container">
-        <div className="quiz-title">HÔM NAY ĐI ĐÂU NHỈ?</div>
+        <div className="quiz-title">BẢNG GỢI Ý NHỎ?</div>
 
         <div className="box-quiz">
           <div className="box quiz-1">

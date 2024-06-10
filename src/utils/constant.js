@@ -11,6 +11,8 @@ export const path = {
   RESIGTER: "/resigter",
   ABOUTUSLOGIN: "/aboutus/user",
   LOCATIONLOGIN: "/location/user",
+  USERLOGIN: "/userlogin",
+  USERPROFILE: "/user",
 };
 
 export const languages = {

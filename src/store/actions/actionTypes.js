@@ -9,6 +9,9 @@ const actionTypes = Object.freeze({
 
   //user
   ADD_USER_SUCCESS: "ADD_USER_SUCCESS",
+
+  //store
+  STORE_LIST: "STORE_LIST",
 });
 
 export default actionTypes;
