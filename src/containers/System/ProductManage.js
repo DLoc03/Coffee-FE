@@ -145,7 +145,6 @@ class ProductManage extends Component {
           <table id="stores">
             <thead>
               <th>Tên quán</th>
-              <th>Hình ảnh</th>
               <th>URL</th>
               <th>ID Chủ quánn</th>
               <th>Tác vụ</th>
@@ -157,7 +156,6 @@ class ProductManage extends Component {
                   return (
                     <tr>
                       <td>{item.name}</td>
-                      <td>{item.image}</td>
                       <td>{item.url}</td>
                       <td>{item.userID}</td>
                       <td>

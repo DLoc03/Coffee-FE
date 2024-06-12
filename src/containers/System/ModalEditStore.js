@@ -5,6 +5,7 @@ import "./ProductManage.scss";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { emitter } from "../../utils/emitter";
 import _ from "lodash";
+import { CommonUtils } from "../../utils";
 
 class ModalEditStore extends Component {
   constructor(props) {
@@ -34,11 +35,15 @@ class ModalEditStore extends Component {
 
   componentDidMount() {
     let store = this.props.currentStore;
+    let imageBase64 = "";
+    if (store.image) {
+      imageBase64 = new Buffer(store.image, `base64`).toString("binary");
+    }
     if (store && !_.isEmpty(store)) {
       this.setState({
         id: store.id,
         name: store.name,
-        image: store.image,
+        image: imageBase64,
         userID: store.userID,
         url: store.url,
       });
@@ -76,13 +81,15 @@ class ModalEditStore extends Component {
     console.log(event.target.value);
   };
 
-  handleOnchangeImage = (event) => {
+  handleOnchangeImage = async (event) => {
     let data = event.target.files;
     let file = data[0];
     if (file) {
+      let base64 = await CommonUtils.getBase64(file);
+      console.log("BASE 64 IMG: ", base64);
       let imageURL = URL.createObjectURL(file);
       this.setState({
-        image: imageURL,
+        image: base64,
       });
     }
     console.log("Image data: ", this.state.previewImg);
@@ -139,8 +146,11 @@ class ModalEditStore extends Component {
             />
             <label>Đường dẫn ảnh</label>
             <input type="text" value={this.state.image} readOnly />
-            <div className="image-preview">
-              <img src={this.state.image} alt="Store-image"></img>
+            <div
+              className="image-preview"
+              style={{ backgroundImage: `url(${this.state.image})` }}
+            >
+              {/* <img src={this.state.image} alt="Store-image"></img> */}
             </div>
           </div>
 

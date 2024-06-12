@@ -1,6 +1,6 @@
 .news-list-scroll {
     display: flex;
-    height: 380px;
+    height: 260px;
     overflow-x: scroll;
 }
 
