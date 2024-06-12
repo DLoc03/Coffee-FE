@@ -77,3 +77,24 @@
     margin-bottom: 20px;
   }
 }
+
+.preview-img-container {
+  display: flex;
+  padding: 20px;
+}
+
+#image-upload {
+  border: 0;
+  margin: 6px 0;
+  margin-left: -12px;
+}
+
+.image-preview {
+  
+}
+
+.image-preview img {
+  margin: 12px 0;
+  width: 10%;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+}

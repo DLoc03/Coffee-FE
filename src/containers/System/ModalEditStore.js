@@ -50,17 +50,42 @@ class ModalEditStore extends Component {
     this.props.toggleFromStore();
   };
 
-  handleOnchangeInput = (event, id) => {
-    let copyState = { ...this.state };
-    copyState[id] = event.target.value;
-    this.setState(
-      {
-        ...copyState,
-      },
-      () => {
-        console.log("Check copy store state: ", this.state);
-      }
-    );
+  // handleOnchangeInput = (event, id) => {
+  //   let copyState = { ...this.state };
+  //   copyState[id] = event.target.value;
+  //   this.setState(
+  //     {
+  //       ...copyState,
+  //     },
+  //     () => {
+  //       console.log("Check copy store state: ", this.state);
+  //     }
+  //   );
+  // };
+  handleOnchangeName = (event) => {
+    this.setState({
+      name: event.target.value,
+    });
+    console.log(event.target.value);
+  };
+
+  handleOnchangeURL = (event) => {
+    this.setState({
+      url: event.target.value,
+    });
+    console.log(event.target.value);
+  };
+
+  handleOnchangeImage = (event) => {
+    let data = event.target.files;
+    let file = data[0];
+    if (file) {
+      let imageURL = URL.createObjectURL(file);
+      this.setState({
+        image: imageURL,
+      });
+    }
+    console.log("Image data: ", this.state.previewImg);
   };
 
   checkValideInput = () => {
@@ -100,7 +125,7 @@ class ModalEditStore extends Component {
             <input
               type="text"
               onChange={(event) => {
-                this.handleOnchangeInput(event, "name");
+                this.handleOnchangeName(event);
               }}
               value={this.state.name}
             />
@@ -108,12 +133,15 @@ class ModalEditStore extends Component {
           <div className="inpurt-container">
             <label>Image</label>
             <input
-              type="text"
-              onChange={(event) => {
-                this.handleOnchangeInput(event, "image");
-              }}
-              value={this.state.image}
+              id="image-upload"
+              type="file"
+              onChange={this.handleOnchangeImage}
             />
+            <label>Đường dẫn ảnh</label>
+            <input type="text" value={this.state.image} readOnly />
+            <div className="image-preview">
+              <img src={this.state.image} alt="Store-image"></img>
+            </div>
           </div>
 
           <div className="inpurt-container">
@@ -121,7 +149,7 @@ class ModalEditStore extends Component {
             <input
               type="text"
               onChange={(event) => {
-                this.handleOnchangeInput(event, "url");
+                this.handleOnchangeURL(event);
               }}
               value={this.state.url}
             />
