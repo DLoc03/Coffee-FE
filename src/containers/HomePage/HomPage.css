@@ -6,8 +6,12 @@ body {
     padding-top: 12px;
 }
 
-.video-home {
+.background-home {
     margin-top: 64px;
+}
+
+.background-home img {
+    width: 100%;
 }
 
 .intro-home {

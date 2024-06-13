@@ -2,8 +2,16 @@ import React, { Component } from "react";
 import "./TopNav.css";
 import Logo from "../../assets/cophee-icon.png";
 import { Link } from "react-router-dom";
+import Location from "../../containers/LocationLogin/LocationLogin";
 
 class TopNav extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      storeSearch: "",
+    };
+  }
+
   render() {
     return (
       <div className="top-nav-box">
@@ -43,6 +51,10 @@ class TopNav extends Component {
             type="text"
             placeholder="Tìm quán cà phê tại đây..."
             id="search-bar"
+            onChange={(event) => {
+              this.handleOnchangeSearch(event);
+            }}
+            value={this.state.storeSearch}
           />
           <button type="submit" id="search-btn" style={{ fontWeight: 600 }}>
             <i class="fas fa-search"></i>

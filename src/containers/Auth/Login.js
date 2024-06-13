@@ -62,7 +62,9 @@ class Login extends Component {
       }
       //Nếu errCode phía server trả về bằng 0 thì đăng nhập thành công
       if (response.data.errCode === 0) {
+        console.log("Thông tin đã đăng nhập: ", response.data.user);
         this.props.userLoginSuccess(response.user);
+        localStorage.setItem("User", JSON.stringify(response.data.user));
         // this.props.history.push("/home/user");
       }
       //Hiển thị lỗi nếu ô nhập email và mật khẩu trống

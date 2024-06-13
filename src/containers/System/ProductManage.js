@@ -141,12 +141,22 @@ class ProductManage extends Component {
         )}
 
         <div className="title text-center">Quản lý quán cà phê</div>
+        <div className="d-flex justify-content-center mx-1">
+          <button
+            className="btn btn-primary px-3"
+            onClick={() => this.AddNewStore()}
+          >
+            <i className="fas fa-plus"></i>Thêm quán cà phê mới
+          </button>
+        </div>
         <div className="stores-table mt-3 mx-1">
           <table id="stores">
             <thead>
               <th>Tên quán</th>
               <th>URL</th>
-              <th>ID Chủ quánn</th>
+              <th>ID Chủ quán</th>
+              <th>Số điện thoại</th>
+              <th>Địa chỉ</th>
               <th>Tác vụ</th>
             </thead>
             <tbody>
@@ -158,6 +168,8 @@ class ProductManage extends Component {
                       <td>{item.name}</td>
                       <td>{item.url}</td>
                       <td>{item.userID}</td>
+                      <td>{item.telephone}</td>
+                      <td>{item.address}</td>
                       <td>
                         <button
                           className="btn-update"
@@ -178,14 +190,14 @@ class ProductManage extends Component {
             </tbody>
           </table>
         </div>
-        <div className="mx-1">
+        {/* <div className="mx-1">
           <button
             className="btn btn-primary px-3"
             onClick={() => this.AddNewStore()}
           >
             <i className="fas fa-plus"></i>Thêm quán cà phê mới
           </button>
-        </div>
+        </div> */}
       </div>
     );
   }

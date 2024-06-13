@@ -16,6 +16,9 @@ class ModalEditStore extends Component {
       image: "",
       userID: "",
       url: "",
+      telephone: "",
+      address: "",
+      userName: "",
     };
 
     this.listenToEmitter();
@@ -46,6 +49,8 @@ class ModalEditStore extends Component {
         image: imageBase64,
         userID: store.userID,
         url: store.url,
+        telephone: store.telephone,
+        address: store.address,
       });
     }
     console.log("Didmount edit modal", this.props.currentStore);
@@ -74,6 +79,20 @@ class ModalEditStore extends Component {
     console.log(event.target.value);
   };
 
+  handleOnchangeTelephone = (event) => {
+    this.setState({
+      telephone: event.target.value,
+    });
+    console.log(event.target.value);
+  };
+
+  handleOnchangeAddress = (event) => {
+    this.setState({
+      address: event.target.value,
+    });
+    console.log(event.target.value);
+  };
+
   handleOnchangeURL = (event) => {
     this.setState({
       url: event.target.value,
@@ -97,7 +116,7 @@ class ModalEditStore extends Component {
 
   checkValideInput = () => {
     let isValid = true;
-    let arrInput = ["name"];
+    let arrInput = ["name", "address", "telephone"];
     for (let i = 0; i < arrInput.length; i++) {
       if (!this.state[arrInput[i]]) {
         isValid = false;
@@ -162,6 +181,28 @@ class ModalEditStore extends Component {
                 this.handleOnchangeURL(event);
               }}
               value={this.state.url}
+            />
+          </div>
+
+          <div className="inpurt-container">
+            <label>Số điện thoại</label>
+            <input
+              type="text"
+              onChange={(event) => {
+                this.handleOnchangeTelephone(event);
+              }}
+              value={this.state.telephone}
+            />
+          </div>
+
+          <div className="inpurt-container">
+            <label>Địa chỉ</label>
+            <input
+              type="text"
+              onChange={(event) => {
+                this.handleOnchangeAddress(event);
+              }}
+              value={this.state.address}
             />
           </div>
 

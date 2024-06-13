@@ -6,6 +6,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { emitter } from "../../utils/emitter";
 import { every } from "lodash";
 import { CommonUtils } from "../../utils";
+import { getAllUsers } from "../../services/userService";
 
 class ModalProduct extends Component {
   constructor(props) {
@@ -15,7 +16,10 @@ class ModalProduct extends Component {
       image: "",
       userID: "",
       url: "",
+      telephone: "",
+      address: "",
       previewImg: "",
+      arrId: [],
     };
 
     this.listenToEmitter();
@@ -28,12 +32,16 @@ class ModalProduct extends Component {
         image: "",
         userID: "",
         url: "",
+        telephone: "",
+        address: "",
+        previewImg: "",
       });
     });
   }
 
   componentDidMount() {
     console.log("ComponentDidMount");
+    this.getAllIdUser();
   }
 
   toggle = () => {
@@ -95,7 +103,7 @@ class ModalProduct extends Component {
   //Kiểm tra thông tin đã nhập đầy đủ chưa
   checkValideInput = () => {
     let isValid = true;
-    let arrInput = ["name", "userID"];
+    let arrInput = ["name", "userID", "address", "telephone"];
     for (let i = 0; i < arrInput.length; i++) {
       if (!this.state[arrInput[i]]) {
         isValid = false;
@@ -114,7 +122,32 @@ class ModalProduct extends Component {
     }
   };
 
+  handleOnchangeTelephone = (event) => {
+    this.setState({
+      telephone: event.target.value,
+    });
+    console.log(event.target.value);
+  };
+
+  handleOnchangeAddress = (event) => {
+    this.setState({
+      address: event.target.value,
+    });
+    console.log(event.target.value);
+  };
+
+  getAllIdUser = async () => {
+    let response = await getAllUsers("ALL");
+    if (response.data && response.data.errCode === 0) {
+      this.setState({
+        arrId: response.data.users,
+      });
+      console.log("Check all ID: ", this.state.arrId);
+    }
+  };
+
   render() {
+    let arrId = this.state.arrId;
     return (
       <Modal
         isOpen={this.props.isStoreOpen}
@@ -137,13 +170,30 @@ class ModalProduct extends Component {
           </div>
           <div className="inpurt-container">
             <label>Id chủ quán</label>
-            <input
+            {/* <input
               type="text"
               onChange={(event) => {
                 this.handleOnchangeIDUser(event);
               }}
               value={this.state.userID}
-            />
+            /> */}
+            <select
+              className="form-control"
+              onChange={(event) => {
+                this.handleOnchangeIDUser(event);
+              }}
+              value={this.state.userID}
+            >
+              {arrId &&
+                arrId.length > 0 &&
+                arrId.map((item, index) => {
+                  return (
+                    <option key={index} value={item.id}>
+                      ID: {item.id}, Chủ quán: {item.userName}
+                    </option>
+                  );
+                })}
+            </select>
           </div>
           <div className="inpurt-container">
             <label>Ảnh</label>
@@ -161,6 +211,29 @@ class ModalProduct extends Component {
               {/* <img src={this.state.image} alt="Store-image"></img> */}
             </div>
           </div>
+
+          <div className="inpurt-container">
+            <label>Số điện thoại</label>
+            <input
+              type="text"
+              onChange={(event) => {
+                this.handleOnchangeTelephone(event);
+              }}
+              value={this.state.telephone}
+            />
+          </div>
+
+          <div className="inpurt-container">
+            <label>Địa chỉ</label>
+            <input
+              type="text"
+              onChange={(event) => {
+                this.handleOnchangeAddress(event);
+              }}
+              value={this.state.address}
+            />
+          </div>
+
           <div className="inpurt-container">
             <label>URL</label>
             <input

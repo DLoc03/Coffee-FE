@@ -20,7 +20,6 @@ class UserLogin extends Component {
       isShowPwd: false,
     };
   }
-
   handleOnChangeEmail = (event) => {
     this.setState({
       email: event.target.value,
@@ -55,6 +54,7 @@ class UserLogin extends Component {
       if (response.data.errCode === 0) {
         // this.props.userLoginSuccess(response.user);
         this.props.history.push("/home/user");
+        localStorage.setItem("User", JSON.stringify(response.data.user));
       }
       //Hiển thị lỗi nếu ô nhập email và mật khẩu trống
     } catch (e) {

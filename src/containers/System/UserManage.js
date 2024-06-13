@@ -141,6 +141,14 @@ class UserManage extends Component {
           />
         )}
         <div className="title text-center">Quản lý thông tin người dùng</div>
+        <div className="d-flex justify-content-center mx-1">
+          <button
+            className="btn btn-primary px-3"
+            onClick={() => this.AddNewUser()}
+          >
+            <i className="fas fa-plus"></i>Thêm người dùng
+          </button>
+        </div>
         <div className="users-table mt-3 mx-1">
           <table id="customers">
             <thead>
@@ -175,14 +183,6 @@ class UserManage extends Component {
                 })}
             </tbody>
           </table>
-        </div>
-        <div className="mx-1">
-          <button
-            className="btn btn-primary px-3"
-            onClick={() => this.AddNewUser()}
-          >
-            <i className="fas fa-plus"></i>Thêm người dùng
-          </button>
         </div>
       </div>
     );

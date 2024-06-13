@@ -41,8 +41,23 @@
     height: 160px;
 }
 
-.store-name {
+.store-content {
     margin-left: 32px;
+}
+
+.store-name {
     font-size: 32px;
     font-weight: 600;
+    margin-bottom: 12px;
 }
+
+.store-info {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 6px 0;
+}
+
+.store-username {
+    font-weight: 600;
+}
+

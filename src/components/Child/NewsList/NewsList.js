@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./NewsList.css";
-import NewsBox from "./NewsBox/NewsBox";
+import { extendWith } from "lodash";
 import { getAllStores } from "../../../services/storeService";
 
 class NewsList extends Component {
@@ -13,12 +13,6 @@ class NewsList extends Component {
 
   async componentDidMount() {
     await this.getAllStoresLocation();
-  }
-
-  async componentDidUpdate(prevProps, prevState) {
-    if (prevState.arrStores !== this.state.arrStores) {
-      await this.getAllStoresLocation();
-    }
   }
 
   getAllStoresLocation = async () => {
@@ -37,7 +31,7 @@ class NewsList extends Component {
   render() {
     let arrStores = this.state.arrStores;
     return (
-      <div className="news-list-scroll">
+      <div className="book-cf-scroll">
         {arrStores &&
           arrStores.length > 0 &&
           arrStores.map((item, index) => {

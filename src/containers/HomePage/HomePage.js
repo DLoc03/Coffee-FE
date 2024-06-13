@@ -4,12 +4,13 @@ import { connect } from "react-redux";
 import TopNav from "../../components/TopNav/TopNav";
 import Footer from "../../components/Footer/footer";
 import "./HomPage.css";
-import Video from "../../components/Video_BG/video_bg";
+// import Video from "../../components/Video_BG/video_bg";
 import ShortIntro from "../../components/Child/ShortIntroduce/ShortIntro";
 import QuizHome from "../../components/Child/QuizHome/QuizHome";
 import RecommandList from "../../components/Child/RecommandList/RecommandList";
 import NewsList from "../../components/Child/NewsList/NewsList";
 import BookCoffeeList from "../../components/Child/BookCoffeeList/BookCoffeeList";
+import BackgroundHome from "../../assets/background-home.jpeg";
 
 class HomePage extends Component {
   render() {
@@ -18,8 +19,8 @@ class HomePage extends Component {
         <div className="top-nav">
           <TopNav />
         </div>
-        <div className="video-home">
-          <Video />
+        <div className="background-home">
+          <img src={BackgroundHome}></img>
         </div>
 
         <div className="intro-home">
