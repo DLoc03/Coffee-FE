@@ -89,9 +89,9 @@ class Login extends Component {
   render() {
     return (
       <div className="login-background">
-        <div className="btn btn-logout" onClick={() => this.comeback()}>
+        {/* <div className="btn btn-logout" onClick={() => this.comeback()}>
           <i className="fas fa-sign-out-alt"></i>
-        </div>
+        </div> */}
         <div className="login-container">
           <div className="login-content row">
             <div className="col-12 text-login">

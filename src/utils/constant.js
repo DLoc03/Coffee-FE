@@ -13,6 +13,7 @@ export const path = {
   LOCATIONLOGIN: "/location/user",
   USERLOGIN: "/userlogin",
   USERPROFILE: "/user",
+  STOREPROFILE: "/userstore",
 };
 
 export const languages = {

@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import Footer from "../../components/Footer/footer";
 import "./PageIsLogin.css";
-import Video from "../../components/Video_BG/video_bg";
+import BackgroundHome from "../../assets/background-home.jpeg";
 import ShortIntro from "../../components/Child/ShortIntroduce/ShortIntro";
 import QuizHome from "../../components/Child/QuizHome/QuizHome";
 import RecommandList from "../../components/Child/RecommandList/RecommandList";
@@ -19,8 +19,8 @@ class HomePage extends Component {
         <div className="top-nav">
           <IsLogin />
         </div>
-        <div className="video-home">
-          <Video />
+        <div className="background-home">
+          <img src={BackgroundHome}></img>
         </div>
 
         <div className="intro-home">

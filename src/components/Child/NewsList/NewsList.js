@@ -2,12 +2,15 @@ import React, { Component } from "react";
 import "./NewsList.css";
 import { extendWith } from "lodash";
 import { getAllStores } from "../../../services/storeService";
+import ModalStoreView from "../ModalStoreView/ModalStoreView";
 
 class NewsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       arrStores: [],
+      isOpenModalView: false,
+      storeInfo: {},
     };
   }
 
@@ -28,10 +31,36 @@ class NewsList extends Component {
       );
     }
   };
+
+  getTopicStoreLocation = (store) => {
+    this.setState({
+      storeInfo: store,
+      isOpenModalView: true,
+    });
+    console.log("Kiểm tra biến trước ", this.state.storeInfo);
+  };
+
+  viewTopicStore = (store) => {
+    this.setState({
+      isOpenModalView: false,
+    });
+  };
+
+  toggleStoreModal = () => {
+    this.setState({
+      isOpenModalView: !this.state.isOpenModalView,
+    });
+  };
+
   render() {
     let arrStores = this.state.arrStores;
     return (
       <div className="book-cf-scroll">
+        {/* <ModalStoreView
+          isModalOpen={this.state.isOpenModalView}
+          currentStore={this.state.storeInfo}
+          toggleFromStore={this.toggleStoreModal}
+        /> */}
         {arrStores &&
           arrStores.length > 0 &&
           arrStores.map((item, index) => {
@@ -41,7 +70,10 @@ class NewsList extends Component {
             }
             return (
               <div>
-                <div className="bookCD-body">
+                <div
+                  className="bookCD-body"
+                  // onClick={() => this.getTopicStoreLocation(item)}
+                >
                   <div
                     className="bookCF-image"
                     style={{ backgroundImage: `url(${imageBase64})` }}

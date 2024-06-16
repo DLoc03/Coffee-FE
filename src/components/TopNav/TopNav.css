@@ -83,7 +83,6 @@
 }
 
 .login-nav button {
-    font-family: var(--font-text);
     font-weight: 400;
     width: 100px;
     height: 52px;
@@ -123,7 +122,6 @@
     border: 1px solid #000000;
     border-radius: 2px;
     width: 80%;
-    font-family: var(--font-text);
 }
 
 #search-btn {

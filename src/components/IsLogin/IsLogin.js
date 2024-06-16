@@ -42,24 +42,27 @@ class IsLogin extends Component {
         <div className="search-container">
           <input
             type="text"
-            placeholder="Tìm quán cà phê tại đây..."
+            placeholder="Tìm quán cà phê? Nhấn vào nút bên cạnh nhé."
             id="search-bar"
+            disabled
           />
-          <button type="submit" id="search-btn" style={{ fontWeight: 600 }}>
-            <i class="fas fa-search"></i>
-          </button>
+          <Link to={"/location/user"}>
+            <button type="button" id="search-btn" style={{ fontWeight: 600 }}>
+              <i class="fas fa-search"></i>
+            </button>
+          </Link>
         </div>
 
-        <div className="recommend-container">
-          <p>#phuong 8</p>
-          <p>#phuong 2</p>
-          <p>#view dep</p>
-          <p>#hung vuong</p>
-          <p>#phu dong</p>
-          <p>#sang trong</p>
-          <p>#chill</p>
-          <p>#thuc an</p>
-          <p>#ngon</p>
+        <div className="storeDK-container">
+          <Link to={"/userstore"}>
+            <button
+              type="button"
+              className="storeDK-btn"
+              style={{ fontWeight: 600 }}
+            >
+              Giới thiệu quán cafe của bạn?
+            </button>
+          </Link>
         </div>
       </div>
     );

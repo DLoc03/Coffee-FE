@@ -2,14 +2,13 @@ import React, { Component } from "react";
 import "./TopNav.css";
 import Logo from "../../assets/cophee-icon.png";
 import { Link } from "react-router-dom";
-import Location from "../../containers/LocationLogin/LocationLogin";
+import LocationLogin from "../../containers/Location/Location";
+import { getAllStores } from "../../services/storeService";
+import { getAllUsers } from "../../services/userService";
 
 class TopNav extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      storeSearch: "",
-    };
   }
 
   render() {
@@ -49,28 +48,26 @@ class TopNav extends Component {
         <div className="search-container">
           <input
             type="text"
-            placeholder="Tìm quán cà phê tại đây..."
+            placeholder="Tìm quán cà phê? Nhấn vào nút bên cạnh nhé."
             id="search-bar"
-            onChange={(event) => {
-              this.handleOnchangeSearch(event);
-            }}
-            value={this.state.storeSearch}
+            disabled
           />
-          <button type="submit" id="search-btn" style={{ fontWeight: 600 }}>
-            <i class="fas fa-search"></i>
-          </button>
+          <Link to={"/listall"}>
+            <button type="button" id="search-btn" style={{ fontWeight: 600 }}>
+              <i class="fas fa-search"></i>
+            </button>
+          </Link>
         </div>
-
-        <div className="recommend-container">
-          <p>#phuong 8</p>
-          <p>#phuong 2</p>
-          <p>#view dep</p>
-          <p>#hung vuong</p>
-          <p>#phu dong</p>
-          <p>#sang trong</p>
-          <p>#chill</p>
-          <p>#thuc an</p>
-          <p>#ngon</p>
+        <div className="storeDK-container">
+          <Link to={"/userlogin"}>
+            <button
+              type="button"
+              className="storeDK-btn"
+              style={{ fontWeight: 600 }}
+            >
+              Giới thiệu quán cafe của bạn?
+            </button>
+          </Link>
         </div>
       </div>
     );

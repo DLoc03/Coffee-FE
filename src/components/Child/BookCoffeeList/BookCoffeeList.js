@@ -3,12 +3,15 @@ import BookCoffeeBox from "./BookCoffeeBox/BookCoffeeBox";
 import "./BookCoffeeList.css";
 import { extendWith } from "lodash";
 import { getAllStores } from "../../../services/storeService";
+import ModalStoreView from "../ModalStoreView/ModalStoreView";
 
 class BookCoffeeList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       arrStores: [],
+      isOpenModalView: false,
+      storeInfo: {},
     };
   }
 
@@ -29,10 +32,34 @@ class BookCoffeeList extends Component {
       );
     }
   };
+  getTopicStoreLocation = (store) => {
+    this.setState({
+      storeInfo: store,
+      isOpenModalView: true,
+    });
+    console.log("Đã click vào: ", this.state.storeInfo);
+  };
+
+  viewTopicStore = (store) => {
+    this.setState({
+      isOpenModalView: false,
+    });
+  };
+
+  toggleStoreModal = () => {
+    this.setState({
+      isOpenModalView: !this.state.isOpenModalView,
+    });
+  };
   render() {
     let arrStores = this.state.arrStores;
     return (
       <div className="book-cf-scroll">
+        {/* <ModalStoreView
+          isModalOpen={this.state.isOpenModalView}
+          currentStore={this.state.storeInfo}
+          toggleFromStore={this.toggleStoreModal}
+        /> */}
         {arrStores &&
           arrStores.length > 0 &&
           arrStores.map((item, index) => {
@@ -42,7 +69,10 @@ class BookCoffeeList extends Component {
             }
             return (
               <div>
-                <div className="bookCD-body">
+                <div
+                  className="bookCD-body"
+                  // onClick={() => this.getTopicStoreLocation(item)}
+                >
                   <div
                     className="bookCF-image"
                     style={{ backgroundImage: `url(${imageBase64})` }}

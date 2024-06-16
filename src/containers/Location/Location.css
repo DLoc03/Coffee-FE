@@ -38,7 +38,7 @@
     background-size: cover;
     overflow: hidden;
     width: 240px;
-    height: 160px;
+    height: 200px;
 }
 
 .store-content {
@@ -58,6 +58,12 @@
 }
 
 .store-username {
+    font-weight: 600;
+}
+
+.search-result {
+    margin: 12px 94px;
+    font-size: 16px;
     font-weight: 600;
 }
 

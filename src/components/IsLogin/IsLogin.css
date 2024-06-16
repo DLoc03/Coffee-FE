@@ -32,12 +32,39 @@
   font-weight: 600;
 }
 
+#search-btn{
+    height: 41px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+
 .profile-list a:hover {
     background-color: #f1f1f1;
 }
 
 .profile-nav:hover .profile-list {
     display: block;
-  }
+}
+
+.storeDK-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.storeDK-btn {
+    border: 0;
+    padding: 12px 32px;
+    border-radius: 2px;
+    background-color: var(--second-color);
+    color: white;
+}
+
+.storeDK-btn:active {
+    background-color: white;
+    color: var(--main-color);
+}
 
   

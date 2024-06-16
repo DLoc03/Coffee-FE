@@ -2,12 +2,15 @@ import React, { Component } from "react";
 import "./RecommandList.css";
 import RecommandBox from "./RecommandBox/RecommandBox";
 import { getAllStores } from "../../../services/storeService";
+import ModalStoreView from "../ModalStoreView/ModalStoreView";
 
 class RecommandList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       arrStores: [],
+      isOpenModalView: false,
+      storeInfo: {},
     };
   }
 
@@ -28,12 +31,43 @@ class RecommandList extends Component {
       );
     }
   };
+
+  getTopicStoreLocation = (store) => {
+    this.setState(
+      {
+        storeInfo: store,
+        isOpenModalView: true,
+      },
+      () => {
+        console.log("Kiểm tra đã click vào ", this.state.storeInfo);
+      }
+    );
+    console.log("Kiểm tra biến trước ", store);
+  };
+
+  viewTopicStore = (store) => {
+    this.setState({
+      isOpenModalView: false,
+    });
+  };
+
+  toggleStoreModal = () => {
+    this.setState({
+      isOpenModalView: !this.state.isOpenModalView,
+    });
+  };
+
   render() {
     let arrStores = this.state.arrStores;
     let recommandStoreCL1 = arrStores.slice(0, 3);
     let recommandStoreCL2 = arrStores.slice(3, 6);
     return (
       <div className="recommand-container">
+        {/* <ModalStoreView
+          isModalOpen={this.state.isOpenModalView}
+          currentStore={this.state.storeInfo}
+          toggleFromStore={this.toggleStoreModal}
+        /> */}
         <div className="recommand-column-1">
           {/* <div className="item recommand-1">
             <RecommandBox />
@@ -55,7 +89,10 @@ class RecommandList extends Component {
               }
               return (
                 <div>
-                  <div className="recommand-body">
+                  <div
+                    className="recommand-body"
+                    // onClick={() => this.getTopicStoreLocation(item)}
+                  >
                     <div
                       className="recommand-img"
                       style={{ backgroundImage: `url(${imageBase64})` }}
@@ -88,7 +125,10 @@ class RecommandList extends Component {
               }
               return (
                 <div>
-                  <div className="recommand-body">
+                  <div
+                    className="recommand-body"
+                    // onClick={() => this.getTopicStoreLocation(item)}
+                  >
                     <div
                       className="recommand-img"
                       style={{ backgroundImage: `url(${imageBase64})` }}
