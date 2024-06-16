@@ -74,3 +74,13 @@
     }
 
 }
+
+.btn-logout {
+    color: var(--main-color);
+    margin: 12px 24px;
+    float: right;
+}
+
+.btn-logout i {
+    font-size: 32px;
+}

@@ -1,84 +1,88 @@
 import React, { Component } from "react";
 import "./NewsList.css";
 import { extendWith } from "lodash";
+import AvtNewsBox from "../../../assets/about-us-image.png";
 import { getAllStores } from "../../../services/storeService";
 import ModalStoreView from "../ModalStoreView/ModalStoreView";
+
+import { getAllTopics } from "../../../services/topicService";
+import ModalTopicView from "../ModalTopicView/ModalTopicView";
 
 class NewsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      arrStores: [],
+      // arrStores: [],
       isOpenModalView: false,
-      storeInfo: {},
+      // storeInfo: {},
+      arrTopics: [],
+      topicInfo: {},
+      image: AvtNewsBox,
     };
   }
 
   async componentDidMount() {
-    await this.getAllStoresLocation();
+    await this.getAllTopicsFromReact();
   }
 
-  getAllStoresLocation = async () => {
-    let response = await getAllStores("ALL");
+  getAllTopicsFromReact = async () => {
+    let response = await getAllTopics("ALL");
     if (response.data && response.data.errCode === 0) {
       this.setState(
         {
-          arrStores: response.data.store,
+          arrTopics: response.data.topics,
         },
         () => {
-          console.log("Check state stores", this.state.arrStores);
+          console.log("Check state topic", this.state.arrTopics);
         }
       );
     }
   };
 
-  getTopicStoreLocation = (store) => {
-    this.setState({
-      storeInfo: store,
+  getTopicLocation = async (topic) => {
+    await this.setState({
+      topicInfo: topic,
       isOpenModalView: true,
     });
-    console.log("Kiểm tra biến trước ", this.state.storeInfo);
+    console.log("Đã chọn: ", this.state.topicInfo);
   };
 
-  viewTopicStore = (store) => {
+  viewTopic = (topic) => {
     this.setState({
       isOpenModalView: false,
     });
   };
 
-  toggleStoreModal = () => {
+  toggleTopicModal = () => {
     this.setState({
       isOpenModalView: !this.state.isOpenModalView,
     });
   };
 
   render() {
-    let arrStores = this.state.arrStores;
+    let arrTopics = this.state.arrTopics;
     return (
-      <div className="book-cf-scroll">
-        {/* <ModalStoreView
+      <div className="news-cf-scroll">
+        <ModalTopicView
           isModalOpen={this.state.isOpenModalView}
-          currentStore={this.state.storeInfo}
-          toggleFromStore={this.toggleStoreModal}
-        /> */}
-        {arrStores &&
-          arrStores.length > 0 &&
-          arrStores.map((item, index) => {
-            let imageBase64 = "";
-            if (item.image) {
-              imageBase64 = new Buffer(item.image, "base64").toString("binary");
-            }
+          currentTopic={this.state.topicInfo}
+          toggleFromTopic={this.toggleTopicModal}
+        />
+        {arrTopics &&
+          arrTopics.length > 0 &&
+          arrTopics.map((item, index) => {
             return (
               <div>
                 <div
-                  className="bookCD-body"
-                  // onClick={() => this.getTopicStoreLocation(item)}
+                  className="news-body"
+                  onClick={() => this.getTopicLocation(item)}
                 >
                   <div
-                    className="bookCF-image"
-                    style={{ backgroundImage: `url(${imageBase64})` }}
+                    className="news-avt"
+                    style={{ backgroundImage: `url(${this.state.image})` }}
                   ></div>
-                  <div className="bookCF-name">{item.name}</div>
+                  <div className="news-title">{item.title}</div>
+                  <div className="news-content">{item.content}</div>
                 </div>
               </div>
             );

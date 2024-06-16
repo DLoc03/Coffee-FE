@@ -56,10 +56,13 @@
 
 .storeDK-btn {
     border: 0;
-    padding: 12px 32px;
+    padding: 16px 64px;
     border-radius: 2px;
     background-color: var(--second-color);
     color: white;
+    margin-top: 20px;
+    font-size: 18px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
 }
 
 .storeDK-btn:active {

@@ -32,12 +32,12 @@ class BookCoffeeList extends Component {
       );
     }
   };
-  getTopicStoreLocation = (store) => {
-    this.setState({
+  getTopicStoreLocation = async (store) => {
+    await this.setState({
       storeInfo: store,
       isOpenModalView: true,
     });
-    console.log("Đã click vào: ", this.state.storeInfo);
+    console.log("Đã chọn: ", this.state.storeInfo);
   };
 
   viewTopicStore = (store) => {
@@ -55,11 +55,11 @@ class BookCoffeeList extends Component {
     let arrStores = this.state.arrStores;
     return (
       <div className="book-cf-scroll">
-        {/* <ModalStoreView
+        <ModalStoreView
           isModalOpen={this.state.isOpenModalView}
           currentStore={this.state.storeInfo}
           toggleFromStore={this.toggleStoreModal}
-        /> */}
+        />
         {arrStores &&
           arrStores.length > 0 &&
           arrStores.map((item, index) => {
@@ -71,7 +71,7 @@ class BookCoffeeList extends Component {
               <div>
                 <div
                   className="bookCD-body"
-                  // onClick={() => this.getTopicStoreLocation(item)}
+                  onClick={() => this.getTopicStoreLocation(item)}
                 >
                   <div
                     className="bookCF-image"

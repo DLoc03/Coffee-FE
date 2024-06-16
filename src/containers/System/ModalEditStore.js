@@ -157,7 +157,7 @@ class ModalEditStore extends Component {
             />
           </div>
           <div className="inpurt-container">
-            <label>Image</label>
+            <label>Hình ảnh</label>
             <input
               id="image-upload"
               type="file"

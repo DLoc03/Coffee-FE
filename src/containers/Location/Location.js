@@ -89,8 +89,8 @@ class LocationLogin extends Component {
     }
   };
 
-  getTopicStoreLocation = (store) => {
-    this.setState({
+  getTopicStoreLocation = async (store) => {
+    await this.setState({
       storeInfo: store,
       isOpenModalView: true,
     });
@@ -113,12 +113,12 @@ class LocationLogin extends Component {
     let arrStores = this.state.arrStores;
     let arrUsers = this.state.arrUsers;
     let storeSearch = this.state.storeSearch;
-
+    let storeInfo = this.state.storeInfo;
     return (
       <div className="all-list-container">
         <ModalStoreView
           isModalOpen={this.state.isOpenModalView}
-          currentStore={this.state.storeInfo}
+          currentStore={storeInfo}
           toggleFromStore={this.toggleStoreModal}
         />
         <div className="top-nav">

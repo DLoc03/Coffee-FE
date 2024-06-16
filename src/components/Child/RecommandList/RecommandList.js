@@ -32,17 +32,12 @@ class RecommandList extends Component {
     }
   };
 
-  getTopicStoreLocation = (store) => {
-    this.setState(
-      {
-        storeInfo: store,
-        isOpenModalView: true,
-      },
-      () => {
-        console.log("Kiểm tra đã click vào ", this.state.storeInfo);
-      }
-    );
-    console.log("Kiểm tra biến trước ", store);
+  getTopicStoreLocation = async (store) => {
+    await this.setState({
+      storeInfo: store,
+      isOpenModalView: true,
+    });
+    console.log("Đã chọn: ", this.state.storeInfo);
   };
 
   viewTopicStore = (store) => {
@@ -63,11 +58,11 @@ class RecommandList extends Component {
     let recommandStoreCL2 = arrStores.slice(3, 6);
     return (
       <div className="recommand-container">
-        {/* <ModalStoreView
+        <ModalStoreView
           isModalOpen={this.state.isOpenModalView}
           currentStore={this.state.storeInfo}
           toggleFromStore={this.toggleStoreModal}
-        /> */}
+        />
         <div className="recommand-column-1">
           {/* <div className="item recommand-1">
             <RecommandBox />
@@ -91,7 +86,7 @@ class RecommandList extends Component {
                 <div>
                   <div
                     className="recommand-body"
-                    // onClick={() => this.getTopicStoreLocation(item)}
+                    onClick={() => this.getTopicStoreLocation(item)}
                   >
                     <div
                       className="recommand-img"
@@ -127,7 +122,7 @@ class RecommandList extends Component {
                 <div>
                   <div
                     className="recommand-body"
-                    // onClick={() => this.getTopicStoreLocation(item)}
+                    onClick={() => this.getTopicStoreLocation(item)}
                   >
                     <div
                       className="recommand-img"

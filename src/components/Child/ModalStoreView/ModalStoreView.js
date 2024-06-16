@@ -5,6 +5,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { CommonUtils } from "../../../utils";
 import { getAllUsers } from "../../../services/userService";
 import { getAllStores } from "../../../services/storeService";
+import Footer from "../../Footer/footer";
 import _ from "lodash";
 
 class ModalProduct extends Component {
@@ -39,8 +40,29 @@ class ModalProduct extends Component {
         telephone: storeInfo.telephone,
         address: storeInfo.address,
       });
-      console.log("store: ", storeInfo.name);
-      console.log("Người dùng: ", this.state.arrUser);
+    }
+  }
+
+  async componentDidUpdate(prevProps) {
+    if (this.props.isModalOpen && !prevProps.isModalOpen) {
+      let user = await getAllUsers("ALL");
+      let storeInfo = this.props.currentStore;
+      let imageBase64 = "";
+      if (storeInfo.image) {
+        imageBase64 = new Buffer(storeInfo.image, `base64`).toString("binary");
+      }
+      if (storeInfo && !_.isEmpty(storeInfo)) {
+        this.setState({
+          storename: storeInfo.name,
+          image: imageBase64,
+          arrUser: user,
+          store: storeInfo,
+          telephone: storeInfo.telephone,
+          address: storeInfo.address,
+        });
+        console.log("store: ", storeInfo.name);
+        console.log("Người dùng: ", this.state.arrUser);
+      }
     }
   }
 
@@ -75,14 +97,32 @@ class ModalProduct extends Component {
             style={{ backgroundImage: `url(${this.state.image})` }}
           ></div>
           <div className="store-info">
+            {arrUser &&
+              arrUser.length > 0 &&
+              arrUser.map((item, index) => {
+                if (item.id === store.userID) {
+                  this.setState({
+                    username: item.name,
+                  });
+                  return (
+                    <div className="info username-info">
+                      {this.state.username}
+                    </div>
+                  );
+                }
+              })}
             <div className="info telephone-info">
               Liên hệ: {this.state.telephone}
             </div>
             <div className="info address-info">
               Địa chỉ: {this.state.address}
             </div>
+            <div className="footer">
+              <Footer />
+            </div>
           </div>
         </ModalBody>
+        <ModalFooter></ModalFooter>
       </Modal>
     );
   }

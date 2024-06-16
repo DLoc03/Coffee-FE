@@ -6,7 +6,7 @@ import * as actions from "../../store/actions";
 
 import "./Resigter.css";
 import { FormattedMessage } from "react-intl";
-import { handleResigter } from "../../services/userService";
+import { handleResigter, handleLogin } from "../../services/userService";
 import axios from "axios";
 import { size } from "lodash";
 import Logo from "../../assets/cophee-icon.png";
@@ -73,6 +73,35 @@ class Resigter extends Component {
       if (response.data.errCode === 0) {
         // this.props.userLoginSuccess(response.user);
         this.props.history.push("/home/user");
+        try {
+          //Gọi hàm handleLogin từ file userService.js
+          let response = await handleLogin(
+            this.state.email,
+            this.state.password
+          );
+          //Nếu errCode phía server trả về khác 0 thì hiển thị mã lỗi lên màn hình
+          if (response.data.errCode !== 0) {
+            this.setState({
+              errMessage: response.data.message,
+            });
+          }
+          //Nếu errCode phía server trả về bằng 0 thì đăng nhập thành công
+          if (response.data.errCode === 0) {
+            // this.props.userLoginSuccess(response.user);
+            this.props.history.push("/home/user");
+            localStorage.setItem("User", JSON.stringify(response.data.user));
+          }
+          //Hiển thị lỗi nếu ô nhập email và mật khẩu trống
+        } catch (e) {
+          if (e.response) {
+            if (e.response.data) {
+              this.setState({
+                errMessage: e.response.data.message,
+              });
+              console.log(e.response.data.message);
+            }
+          }
+        }
       }
       //Hiển thị lỗi nếu ô nhập email và mật khẩu trống
     } catch (e) {
@@ -93,9 +122,16 @@ class Resigter extends Component {
     });
   };
 
+  Comeback() {
+    window.location.href = "/home";
+  }
+
   render() {
     return (
       <div className="resigter-background">
+        <div className="btn btn-logout" onClick={this.Comeback}>
+          <i className="fas fa-sign-out-alt"></i>
+        </div>
         <div className="resigter-container">
           <div className="resigter-content row">
             <div className="col-12 text-resigter">

@@ -9,6 +9,8 @@ import axios from "axios";
 import { size } from "lodash";
 import Logo from "../../assets/cophee-icon.png";
 import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "./UserLogin.css";
 
 class UserLogin extends Component {
   constructor(props) {
@@ -75,9 +77,16 @@ class UserLogin extends Component {
     });
   };
 
+  Comeback() {
+    window.location.href = "/home";
+  }
+
   render() {
     return (
       <div className="login-background">
+        <div className="btn btn-logout" onClick={this.Comeback}>
+          <i className="fas fa-sign-out-alt"></i>
+        </div>
         <div className="login-container">
           <div className="login-content row">
             <div className="col-12 text-login">
@@ -126,9 +135,13 @@ class UserLogin extends Component {
               </button>
             </div>
 
-            {/* <div className="col-12">
-              <span className="forgot-password">Qu?</span>
-            </div> */}
+            <Link to={"/resigter"}>
+              <div className="col-12">
+                <span className="resigter-account">
+                  Chưa có tài khoản? Đăng ký ngay
+                </span>
+              </div>
+            </Link>
           </div>
         </div>
       </div>
